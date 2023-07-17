@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-info">
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <form action="/answer" method="post">
+        <p>{{question.question}}</p>
+
+        {% for choice in question.choices %}
+        <input type="radio" id="{{choice}}" name="answer" value="{{choice}}">
+        <label for="{{choice}}">{{choice}}</label>
+        {% endfor %}
+        <input type="hidden" name="next" value="{{next}}">
+        <input type="hidden" name="last" value="{{last}}">
+        <br>
+        <button>Next</button>
+    </form>
+</body>
+
+</html>
